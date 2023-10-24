@@ -36,7 +36,7 @@ async function makePostRequest(url, data) {
 async function splitDialogText(dialog_text) {
     
     const userPattern = /user:(.*?)(?=(agent:|$))/gs;
-    const agentPattern = /(agent|system):(.*?)(?=(user:|$))/gs;
+    const agentPattern = /agent:(.*?)(?=(user:|$))/gs;
     
     const userMatches = dialog_text.matchAll(userPattern);
     const agentMatches = dialog_text.matchAll(agentPattern);
@@ -66,6 +66,7 @@ async function processEvent(event, { config, cache }) {
     const dialog = event.properties['text']
     const utterances = await splitDialogText(dialog);
 
+    console.log("agent utterances", utterances.agent);
     // Get conversation toxicity
     const textRoles = [];
     for (const userUtterance of utterances.user) {
@@ -74,7 +75,7 @@ async function processEvent(event, { config, cache }) {
     }
 
     for (const agentUtterance of utterances.agent) {
-        let cleanedAgentUtterance = agentUtterance.replace(/^agent:/, '');
+        let cleanedAgentUtterance = agentUtterance.replace(/^(agent|system):/, '');
         textRoles.push({ text: cleanedAgentUtterance, role: ROLE_AGENT });
     }
 
