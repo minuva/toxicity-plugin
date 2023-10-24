@@ -78,12 +78,10 @@ async function processEvent(event, { config, cache }) {
         textRoles.push({ text: agentUtterance, role: ROLE_AGENT });
     }
 
-    console.log("textRoles", textRoles)
-    res = await makePostRequest(fullUrl, textRoles);
-    
-    // Iterate res dictionary and add to event
+    const res = await makePostRequest(fullUrl, textRoles);
+
     for (const key in res) {
-      if (res.hasOwnProperty(key) && res[key] > 0) {
+      if (res[key] > 0) {
             event.properties[key] = res[key]; 
         }
     }
