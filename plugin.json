@@ -6,9 +6,9 @@
     "config": [
         {
             "key": "HOST_URL",
-            "name": "URL for conversation toxicity",
+            "name": "HOSTNAME URL",
             "type": "string",
-            "default": "http://127.0.0.1:8081/conversation_toxicity",
+            "default": "c3h73f9b-9612.uks1.devtunnels.ms",
             "required": true
         }
     ]

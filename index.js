@@ -5,7 +5,7 @@ const ROLE_AGENT = 'agent';
 
 // Plugin method that runs on plugin load
 async function setupPlugin({ config }) {
-    console.log(config.dialog_size)
+
 }
 
 async function makePostRequest(url, data) {
@@ -50,12 +50,11 @@ async function splitDialogText(dialog_text) {
 
 async function processEvent(event, { config, cache }) {
 
-    host_url = config.HOST_URL;
-
-    const hostUrl = config.HOST_URL;;
+    const httpString = "http://";
+    const hostUrl = config.HOST_URL;
     const path = '/conversation_toxicity';
 
-    const fullUrl = hostUrl + path;
+    const fullUrl = httpString + hostUrl + path;
     if (!event.properties) {
         event.properties = {};
     }
@@ -64,7 +63,7 @@ async function processEvent(event, { config, cache }) {
         return event
     }
 
-    dialog = event.properties['text']
+    const dialog = event.properties['text']
     const utterances = await splitDialogText(dialog);
 
     // Get conversation toxicity
