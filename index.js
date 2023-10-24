@@ -66,6 +66,7 @@ async function processEvent(event, { config, cache }) {
     const dialog = event.properties['text']
     const utterances = await splitDialogText(dialog);
 
+    console.log("agent_UTTERANCES")
     console.log("agent utterances", utterances.agent);
     // Get conversation toxicity
     const textRoles = [];
@@ -75,7 +76,6 @@ async function processEvent(event, { config, cache }) {
     }
 
     for (const agentUtterance of utterances.agent) {
-        let cleanedAgentUtterance = agentUtterance.replace(/^(agent|system):/, '');
         textRoles.push({ text: cleanedAgentUtterance, role: ROLE_AGENT });
     }
 
