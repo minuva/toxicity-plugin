@@ -1,0 +1,15 @@
+{
+    "name": "Conversation Toxicity",
+    "url": "https://github.com/AndrMoura/plugin-test",
+    "description": "Get user and agent toxicity in a conversation",
+    "main": "index.js",
+    "config": [
+        {
+            "key": "HOST_URL",
+            "name": "URL for conversation toxicity",
+            "type": "string",
+            "default": "http://127.0.0.1:8081/conversation_toxicity",
+            "required": true
+        }
+    ]
+}
