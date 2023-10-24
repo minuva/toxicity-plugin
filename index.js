@@ -76,7 +76,7 @@ async function processEvent(event, { config, cache }) {
     }
 
     for (const agentUtterance of utterances.agent) {
-        textRoles.push({ text: cleanedAgentUtterance, role: ROLE_AGENT });
+        textRoles.push({ text: agentUtterance, role: ROLE_AGENT });
     }
 
     console.log("textRoles", textRoles)
