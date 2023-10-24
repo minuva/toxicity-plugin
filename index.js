@@ -74,7 +74,7 @@ async function processEvent(event, { config, cache }) {
     }
 
     for (const agentUtterance of utterances.agent) {
-        let cleanedAgentUtterance = agentUtterance.replace(/^(agent|system):/, '');
+        let cleanedAgentUtterance = agentUtterance.replace(/^agent:/, '');
         textRoles.push({ text: cleanedAgentUtterance, role: ROLE_AGENT });
     }
 
