@@ -1,7 +1,5 @@
 /* global module */
 /* eslint no-undef: "error" */
-const ROLE_USER = 'user';
-const ROLE_AGENT = 'agent';
 
 // Plugin method that runs on plugin load
 async function setupPlugin({ config }) {
@@ -61,24 +59,13 @@ async function processEvent(event, { config, cache }) {
         event.properties = {};
     }
 
-    if (!event.properties['text']) {
+    if (!event.properties['$dialog']) {
         return event
     }
 
-    const dialog = event.properties['text']
-    const utterances = await splitDialogText(dialog);
-
-    // Get conversation toxicity
-    const textRoles = [];
-    for (const userUtterance of utterances.user) {
-        textRoles.push({ text: userUtterance, role: ROLE_USER });
-    }
-
-    for (const agentUtterance of utterances.agent) {
-        textRoles.push({ text: agentUtterance, role: ROLE_AGENT });
-    }
-
-    const res = await makePostRequest(fullUrl, textRoles);
+    var dialog = event.properties['$dialog']
+    dialog = JSON.parse(dialog);
+    const res = await makePostRequest(fullUrl, dialog);
 
     for (const key in res) {
       if (res[key] > 0) {
