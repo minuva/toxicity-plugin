@@ -31,26 +31,9 @@ async function makePostRequest(url, data) {
     }
 }
 
-async function splitDialogText(dialog_text) {
-    
-    const userPattern = /user:(.*?)(?=(agent:|$))/gs;
-    const agentPattern = /((?:agent|system):.*?(?=(?:agent:|user:|$)))/gs;
-
-    const userMatches = dialog_text.matchAll(userPattern);
-    const agentMatches = dialog_text.matchAll(agentPattern);
-
-    const cleanAndTrim = (utterance) => utterance.replace(/^(user|agent|system):/, '').trim();
-
-    const userUtterances = [...userMatches].map(match => cleanAndTrim(match[1]));
-    const agentUtterances = [...agentMatches].map(match => cleanAndTrim(match[1]));
-    
-    return { user: userUtterances, agent: agentUtterances };
-
-}
-
 async function processEvent(event, { config, cache }) {
 
-    const httpString = "http://";
+    const httpString = "https://";
     const hostUrl = config.HOST_URL;
     const path = '/conversation_toxicity';
 
