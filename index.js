@@ -15,7 +15,6 @@ async function makePostRequest(url, data) {
         "Accept-Encoding": "gzip, deflate, br",
         "Connection": "keep-alive",
         "Accept": "*/*",
-         
       },
       body: JSON.stringify(data)
     });
@@ -25,11 +24,14 @@ async function makePostRequest(url, data) {
       return responseData;
     } else {
       console.error("Request code " + response.status);
+      throw new Error("Request failed with status code " + response.status);
     }
   } catch (error) {
     console.error("Error:", error);
+    throw error; 
   }
 }
+
 
 async function processEvent(event, { config, cache }) {
 
