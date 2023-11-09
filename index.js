@@ -83,8 +83,9 @@ async function processEvent(event, { config, cache }) {
 
     const path = 'conversation_toxicity';
     let fullUrl = '';
-    if (isValidURL(config.API_SERVER_URL)) {
-      const API_SERVER_URL = API_SERVER_URL.endsWith('/')? API_SERVER_URL : API_SERVER_URL + '/';
+    let API_SERVER_URL = config.API_SERVER_URL;
+    if (isValidURL(API_SERVER_URL)) {
+      API_SERVER_URL = API_SERVER_URL.endsWith('/')? API_SERVER_URL : API_SERVER_URL + '/';
       fullUrl = API_SERVER_URL + path;
     }
     else
