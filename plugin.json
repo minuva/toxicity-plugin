@@ -5,22 +5,11 @@
     "main": "index.js",
     "config": [
         {
-            "key": "HOST_URL",
+            "key": "API_SERVER_URL",
             "name": "HOSTNAME URL",
             "type": "string",
-            "default": "dodo-promoted-roughy.ngrok-free.app",
+            "default": "https://dodo-promoted-roughy.ngrok-free.app",
             "required": true
-        },
-        {
-            "key": "HTTP_HTTPS",
-            "name": "HTTP or HTTPS",
-            "type": "choice",
-            "default": "https",
-            "required": true,
-            "choices": [
-                "http",
-                "https"
-            ]
         }
     ]
 }
