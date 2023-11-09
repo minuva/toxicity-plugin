@@ -35,7 +35,7 @@ async function makePostRequest(url, data) {
 
 async function processEvent(event, { config, cache }) {
 
-    const httpString = "https://";
+    const httpString = config.HTTP_HTTPS + "://"
     const hostUrl = config.HOST_URL;
     const path = '/conversation_toxicity';
 

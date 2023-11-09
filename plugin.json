@@ -10,6 +10,17 @@
             "type": "string",
             "default": "dodo-promoted-roughy.ngrok-free.app",
             "required": true
+        },
+        {
+            "key": "HTTP_HTTPS",
+            "name": "HTTP or HTTPS",
+            "type": "choice",
+            "default": "https",
+            "required": true,
+            "choices": [
+                "http",
+                "https"
+            ]
         }
     ]
 }
