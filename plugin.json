@@ -1,6 +1,6 @@
 {
     "name": "Conversation Toxicity",
-    "url": "https://github.com/AndrMoura/toxicity-plugin",
+    "url": "https://github.com/minuva/toxicity-plugin",
     "description": "Get user and agent toxicity in a conversation",
     "main": "index.js",
     "config": [
@@ -8,7 +8,7 @@
             "key": "API_SERVER_URL",
             "name": "HOSTNAME URL",
             "type": "string",
-            "default": "https://dodo-promoted-roughy.ngrok-free.app",
+            "default": "https://cloud-ml-app-qnb6bcsgwa-ey.a.run.app",
             "required": true
         }
     ]
