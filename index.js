@@ -103,9 +103,9 @@ async function processEvent(event, { config, cache }) {
       event.properties['user_severe_toxicity'] ||
       event.properties['agent_toxicity'] ||
       event.properties['agent_severe_toxicity']
-  ) {
-      return event;
-  }
+    ) {
+        return event;
+    }
 
     var dialog = event.properties['$dialog']
     dialog = JSON.parse(dialog);
