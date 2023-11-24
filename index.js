@@ -97,9 +97,15 @@ async function processEvent(event, { config, cache }) {
         event.properties = {};
     }
 
-    if (!event.properties['$dialog']) {
-        return event
-    }
+    if (
+      !event.properties['$dialog'] ||
+      event.properties['user_toxicity'] ||
+      event.properties['user_severe_toxicity'] ||
+      event.properties['agent_toxicity'] ||
+      event.properties['agent_severe_toxicity']
+  ) {
+      return event;
+  }
 
     var dialog = event.properties['$dialog']
     dialog = JSON.parse(dialog);
