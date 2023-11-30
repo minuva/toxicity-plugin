@@ -80,7 +80,6 @@ function isValidURL(url) {
 
 
 async function processEvent(event, { config, cache }) {
-
     const path = 'conversation_toxicity';
     let fullUrl = '';
     let API_SERVER_URL = config.API_SERVER_URL;
@@ -96,29 +95,45 @@ async function processEvent(event, { config, cache }) {
     if (!event.properties) {
         event.properties = {};
     }
-
+  
     if (
-      !event.properties['$dialog'] ||
-      event.properties['user_toxicity'] ||
-      event.properties['user_severe_toxicity'] ||
-      event.properties['agent_toxicity'] ||
-      event.properties['agent_severe_toxicity']
+      !event.properties['$dialog']) {
+      return event;
+    }
+    // Check if toxicity properties exist and remove those with values equal to zero
+    if (
+      event.properties['user_toxicity'] !== undefined ||
+      event.properties['user_severe_toxicity'] !== undefined ||
+      event.properties['agent_toxicity'] !== undefined ||
+      event.properties['agent_severe_toxicity'] !== undefined
     ) {
-        return event;
-    }
 
-    var dialog = event.properties['$dialog']
-    dialog = JSON.parse(dialog);
-    const res = await makePostRequest(fullUrl, dialog);
-
-    for (const key in res) {
-      if (res[key] > 0) {
-            event.properties[key] = res[key]; 
+      for (const prop of ['user_toxicity', 'user_severe_toxicity', 'agent_toxicity', 'agent_severe_toxicity']) {
+        if (event.properties[prop] === 0) {
+          delete event.properties[prop];
         }
+      }
+      return event;
     }
 
-    return event;
+
+    else {
+      // if none exist, make call
+      var dialog = event.properties['$dialog'];
+      dialog = JSON.parse(dialog);
+      const res = await makePostRequest(fullUrl, dialog);
+
+      for (const key in res) {
+        if (res[key] > 0) {
+          event.properties[key] = res[key];
+        }
+      }
+    }
+
+  return event;
 }
+
+
 
 // The plugin itself
 module.exports = {
