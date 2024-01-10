@@ -33,6 +33,22 @@ async function makePostRequest(url, data, token) {
   }
 }
 
+function GetToken(token) {
+
+    DEFAULT_TOKEN = process.env.AUTH_TOKEN_PLUGIN;
+  
+    if (token) {
+        return token;
+    }
+    else if (DEFAULT_TOKEN) {
+        return DEFAULT_TOKEN;
+    }
+    else {
+        console.error('AUTH_TOKEN_PLUGIN is not set');
+        throw new Error('AUTH_TOKEN_PLUGIN is not set');
+    }
+}
+
 function isValidURL(url) {
   try {
     const urlObject = new URL(url);
@@ -84,6 +100,7 @@ async function processEvent(event, { config, cache }) {
     const path = 'conversation_toxicity';
     let fullUrl = '';
     let API_SERVER_URL = config.API_SERVER_URL;
+    token = GetToken(config.API_KEY);
     if (isValidURL(API_SERVER_URL)) {
       API_SERVER_URL = API_SERVER_URL.endsWith('/')? API_SERVER_URL : API_SERVER_URL + '/';
       fullUrl = API_SERVER_URL + path;
@@ -121,7 +138,7 @@ async function processEvent(event, { config, cache }) {
       // if none exist, make call
       var dialog = event.properties['$dialog'];
       dialog = JSON.parse(dialog);
-      const res = await makePostRequest(fullUrl, dialog, config.API_KEY);
+      const res = await makePostRequest(fullUrl, dialog, config.token);
 
       for (const key in res) {
         if (res[key] > 0) {
