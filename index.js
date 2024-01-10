@@ -6,7 +6,7 @@ async function setupPlugin({ config }) {
 
 }
 
-async function makePostRequest(url, data) {
+async function makePostRequest(url, data, token) {
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -15,6 +15,7 @@ async function makePostRequest(url, data) {
         "Accept-Encoding": "gzip, deflate, br",
         "Connection": "keep-alive",
         "Accept": "*/*",
+        "token": token
       },
       body: JSON.stringify(data)
     });
@@ -115,7 +116,6 @@ async function processEvent(event, { config, cache }) {
       }
       return event;
     }
-
 
     else {
       // if none exist, make call
