@@ -138,7 +138,7 @@ async function processEvent(event, { config, cache }) {
       // if none exist, make call
       var dialog = event.properties['$dialog'];
       dialog = JSON.parse(dialog);
-      const res = await makePostRequest(fullUrl, dialog, config.token);
+      const res = await makePostRequest(fullUrl, dialog, token);
 
       for (const key in res) {
         if (res[key] > 0) {
