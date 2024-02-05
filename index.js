@@ -35,7 +35,7 @@ async function makePostRequest(url, data, token) {
 
 function GetToken(token) {
 
-    DEFAULT_TOKEN = process.env.AUTH_TOKEN_PLUGIN;
+    let DEFAULT_TOKEN = process.env.AUTH_TOKEN_PLUGIN;
   
     if (token) {
         return token;
@@ -100,7 +100,7 @@ async function processEvent(event, { config, cache }) {
     const path = 'conversation_toxicity';
     let fullUrl = '';
     let API_SERVER_URL = config.API_SERVER_URL;
-    token = GetToken(config.API_KEY);
+    let token = GetToken(config.API_KEY);
     if (isValidURL(API_SERVER_URL)) {
       API_SERVER_URL = API_SERVER_URL.endsWith('/')? API_SERVER_URL : API_SERVER_URL + '/';
       fullUrl = API_SERVER_URL + path;
