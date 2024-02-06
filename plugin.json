@@ -10,6 +10,12 @@
             "type": "string",
             "default": "https://cloud-ml-app-qnb6bcsgwa-ey.a.run.app",
             "required": true
+        },
+        {
+            "key": "API_KEY",
+            "name": "API_KEY",
+            "type": "string",
+            "required": false
         }
     ]
 }
