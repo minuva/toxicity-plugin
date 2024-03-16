@@ -97,7 +97,7 @@ function isValidURL(url) {
 
 
 async function processEvent(event, { config, cache }) {
-    const path = 'conversation_toxicity';
+    const path = 'conversation_toxicity_plugin';
     let fullUrl = '';
     let API_SERVER_URL = config.API_SERVER_URL;
     let token = GetToken(config.API_KEY);
